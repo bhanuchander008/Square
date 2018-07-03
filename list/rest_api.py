@@ -68,7 +68,7 @@ def post(request, _values):
 
 
 @api_view(['GET', 'POST'])
-def post (request,_Number):
+def getpost (request,_Number):
 
     if request.method == 'GET':
         mul = SquareTest.objects.filter(Number=_Number)
