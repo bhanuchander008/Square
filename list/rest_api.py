@@ -65,3 +65,22 @@ def post(request, _values):
         cursor.close()
         print (_sq)
         return Response({'Message': 'New number and square inserted', 'Number': _num, 'SquareNumber': _sq})
+
+
+@api_view(['GET', 'POST'])
+def post (request,_Number):
+
+    if request.method == 'GET':
+        mul = SquareTest.objects.filter(Number=_Number)
+        serializer = SquareTestSerializer(mul, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = SquareTestSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(serializer.data, status= 301)
+
+
